@@ -42,13 +42,11 @@ public class KundeController {
         }
     }
 
-    @GetMapping()
-    public String getUsers(@RequestParam(value="page", defaultValue ="1") int page,
-                           @RequestParam(value="limit", defaultValue = "50") int limit,
-                           @RequestParam(value="sort", required = false) String sort)
+    @GetMapping(path = "/{kundeid}")
+    public String getUsers(@RequestBody KundeRequest kundeDetails)
 
     {
-        return "get user was called with page = " + page + " and limit = " + limit + " and sort = " + sort;
+        return "get Mapping";
     }
 
     @PostMapping (consumes = {
@@ -64,7 +62,7 @@ public class KundeController {
         return new ResponseEntity<Kunde>(returnValue, HttpStatus.OK);
     }
 
-    @PutMapping (path="/{userID}",consumes = {
+    @PutMapping (path="/{kundeid}",consumes = {
             MediaType.APPLICATION_XML_VALUE,
             MediaType.APPLICATION_JSON_VALUE
     }, produces = {
@@ -82,7 +80,7 @@ public class KundeController {
         return storedUserDetails;
     }
 
-    @DeleteMapping(path="/{id}")
+    @DeleteMapping(path="/{kundeid}")
     public ResponseEntity<Void> deleteUser(@PathVariable String id)
     {
         kunden.remove(id);
