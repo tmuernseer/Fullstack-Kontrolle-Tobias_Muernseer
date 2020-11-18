@@ -7,6 +7,5 @@ import schriftlichekontrolle.rechnungsverwaltung.model.Kunde;
 
 @Repository
 public interface KundeRepository extends JpaRepository<Kunde, Long> {
-    Kunde createKunde(KundeService userDetails);
 
 }
