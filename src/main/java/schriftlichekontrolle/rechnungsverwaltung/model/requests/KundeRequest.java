@@ -5,6 +5,7 @@ import schriftlichekontrolle.rechnungsverwaltung.model.Rechnung;
 import java.util.List;
 
 public class KundeRequest {
+    private String id;
     private String vorName;
     private String nachName;
     private List<Rechnung> rechnungen;
@@ -31,5 +32,17 @@ public class KundeRequest {
 
     public void setRechnungen(List<Rechnung> rechnungen) {
         this.rechnungen = rechnungen;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public List<Rechnung> getRechnungen() {
+        return rechnungen;
     }
 }
