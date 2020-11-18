@@ -1,25 +1,13 @@
-package schriftlichekontrolle.rechnungsverwaltung.model;
+package schriftlichekontrolle.rechnungsverwaltung.model.requests;
 
-import com.sun.istack.NotNull;
+import schriftlichekontrolle.rechnungsverwaltung.model.Rechnung;
 
-import javax.persistence.*;
 import java.util.List;
 
-@Entity
-@Table(name = "KUNDE")
-public class Kunde {
-
-    @Id
-    private String id;
-    @NotNull
+public class KundeRequest {
     private String vorName;
-    @NotNull
     private String nachName;
-    @OneToMany
-    @JoinColumn(name = "Rechnung")
     private List<Rechnung> rechnungen;
-
-    public Kunde(){}
 
     public String getVorName() {
         return vorName;
@@ -37,15 +25,11 @@ public class Kunde {
         this.nachName = nachName;
     }
 
-    public List<Rechnung> getRechnungen() {
+    public List<Rechnung> getRechnung() {
         return rechnungen;
     }
 
     public void setRechnungen(List<Rechnung> rechnungen) {
         this.rechnungen = rechnungen;
-    }
-
-    public void setID(String kundeid) {
-        this.id = id;
     }
 }

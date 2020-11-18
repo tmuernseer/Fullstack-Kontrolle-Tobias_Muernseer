@@ -1,30 +1,41 @@
 package schriftlichekontrolle.rechnungsverwaltung.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import schriftlichekontrolle.rechnungsverwaltung.Utils;
 import schriftlichekontrolle.rechnungsverwaltung.model.Kunde;
-import schriftlichekontrolle.rechnungsverwaltung.repository.KundeRepository;
+import schriftlichekontrolle.rechnungsverwaltung.model.requests.KundeRequest;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class KundeService {
+
+    private static Utils utils;
+    private static HashMap<String, Kunde> kunden;
+
+    public KundeService(){}
+
     @Autowired
-    private KundeRepository repo;
-
-    public List<Kunde> listAll(){
-        return repo.findAll();
+    public KundeService(Utils utils){
+        this.utils = utils;
     }
 
-    public void save(Kunde kunde){
-        repo.save(kunde);
+    public Kunde createKunde(KundeRequest userDetails){
+
+        Kunde returnValue = new Kunde();
+        returnValue.setVorName(userDetails.getVorName());
+        returnValue.setNachName(userDetails.getNachName());
+        returnValue.setRechnungen(userDetails.getRechnung());
+
+        String kundeid = utils.generateKundeId();
+        returnValue.setID(kundeid);
+        if(kunden == null) kunden = new HashMap<>();
+        kunden.put(kundeid, returnValue);
+
+        return returnValue;
     }
 
-    public Kunde get(Long id){
-        return repo.findById(id).get();
-    }
-
-    public void delete(Long id){
-        repo.deleteById(id);
-    }
 }
