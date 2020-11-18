@@ -2,13 +2,11 @@ package schriftlichekontrolle.rechnungsverwaltung.model;
 
 import com.sun.istack.NotNull;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "rechnung")
+@Table(name = "Rechnung")
 public class Rechnung {
 
     @Id
@@ -20,10 +18,11 @@ public class Rechnung {
     private Date Rechnungsdatum;
     @NotNull
     private Long Rechnungsbetrag;
-    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "Kunde")
     private Kunde kunde;
 
-    protected Rechnung(){
+    public Rechnung(){
     }
 
     public Long getId() {

@@ -2,15 +2,12 @@ package schriftlichekontrolle.rechnungsverwaltung.model;
 
 import com.sun.istack.NotNull;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import java.awt.*;
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "kunde")
+@Table(name = "Kunde")
 public class Kunde {
 
     @Id
@@ -19,10 +16,11 @@ public class Kunde {
     private String vorName;
     @NotNull
     private String nachName;
-    @NotNull
-    private ArrayList<Rechnung> rechnungen;
+    @OneToMany
+    @JoinColumn(name = "Rechnung")
+    private List<Rechnung> rechnungen;
 
-    protected Kunde(){}
+    public Kunde(){}
 
     public Long getId() {
         return id;
