@@ -10,23 +10,24 @@ import schriftlichekontrolle.rechnungsverwaltung.model.Kunde;
 import schriftlichekontrolle.rechnungsverwaltung.repository.KundeRepository;
 
 @RestController
+@RequestMapping("/kunden")
 public class KundeController {
 
     @Autowired
     private KundeRepository kundeRepository;
 
-    @GetMapping("/kunden")
-    public Page<Kunde> getAllBrands(Pageable pageable) {
+    @GetMapping()
+    public Page<Kunde> getAllKunden(Pageable pageable) {
         return kundeRepository.findAll(pageable);
     }
 
-    @PostMapping("/kunden")
-    public Kunde createBrand(@RequestBody Kunde kunde) {
+    @PostMapping()
+    public Kunde createKunde(@RequestBody Kunde kunde) {
         return kundeRepository.save(kunde);
     }
 
-    @PutMapping("/kunden/{kundeid}")
-    public Kunde updateBrand(@PathVariable Long kundeid, @RequestBody Kunde kundeRequest) {
+    @PutMapping(path = "/{kundeid}")
+    public Kunde updateKunde(@PathVariable Long kundeid, @RequestBody Kunde kundeRequest) {
         return kundeRepository.findById(kundeid).map(kunde -> {
             kunde.setVorName(kundeRequest.getVorName());
             kunde.setNachName(kundeRequest.getNachName());
@@ -35,8 +36,8 @@ public class KundeController {
         }).orElseThrow(() -> new ResourceNotFoundException("Kunde ID " + kundeid + " not found"));
     }
 
-    @DeleteMapping("/kunden/{kundeid}")
-    public ResponseEntity<?> deleteBrand(@PathVariable Long kundeid) {
+    @DeleteMapping(path = "/{kundeid}")
+    public ResponseEntity<?> deleteKunde(@PathVariable Long kundeid) {
         return kundeRepository.findById(kundeid).map(kunde -> {
             kundeRepository.delete(kunde);
             return ResponseEntity.ok().build();

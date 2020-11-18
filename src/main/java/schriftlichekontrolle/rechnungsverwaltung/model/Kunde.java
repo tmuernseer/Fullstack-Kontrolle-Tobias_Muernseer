@@ -3,11 +3,10 @@ package schriftlichekontrolle.rechnungsverwaltung.model;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Kunde")
+@Table(name = "KUNDE")
 public class Kunde {
 
     @Id
@@ -50,7 +49,7 @@ public class Kunde {
         return rechnungen;
     }
 
-    public void setRechnungen(ArrayList<Rechnung> rechnungen) {
+    public void setRechnungen(List<Rechnung> rechnungen) {
         this.rechnungen = rechnungen;
     }
 }
