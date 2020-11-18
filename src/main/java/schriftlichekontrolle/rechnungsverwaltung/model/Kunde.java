@@ -46,7 +46,7 @@ public class Kunde {
         this.nachName = nachName;
     }
 
-    public ArrayList<Rechnung> getRechnungen() {
+    public List<Rechnung> getRechnungen() {
         return rechnungen;
     }
 
