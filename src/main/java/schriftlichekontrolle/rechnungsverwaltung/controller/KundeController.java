@@ -3,6 +3,7 @@ package schriftlichekontrolle.rechnungsverwaltung.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import schriftlichekontrolle.rechnungsverwaltung.exception.ResourceNotFoundException;
 import schriftlichekontrolle.rechnungsverwaltung.model.Kunde;
@@ -34,5 +35,12 @@ public class KundeController {
         }).orElseThrow(() -> new ResourceNotFoundException("Kunde ID " + kundeid + " not found"));
     }
 
+    @DeleteMapping("/kunden/{kundeid}")
+    public ResponseEntity<?> deleteBrand(@PathVariable Long kundeid) {
+        return kundeRepository.findById(kundeid).map(kunde -> {
+            kundeRepository.delete(kunde);
+            return ResponseEntity.ok().build();
+        }).orElseThrow(() -> new ResourceNotFoundException("Kunde ID " + kundeid + " not found"));
+    }
 
 }
